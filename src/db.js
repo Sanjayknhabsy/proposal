@@ -1,10 +1,47 @@
 const path = require('path');
+const fs = require('fs');
 const Database = require('better-sqlite3');
 
-const dbFile = path.join(__dirname, '..', 'data.sqlite');
-const db = new Database(dbFile);
+// Choose a database file path that's safe for both local and serverless environments.
+// Priority:
+// 1. process.env.DB_PATH (explicit)
+// 2. Use /tmp/data.sqlite for serverless platforms (Vercel, AWS Lambda, Azure Functions)
+// 3. Fallback to a local file at project root (../data.sqlite)
+let dbFile = process.env.DB_PATH;
+if (!dbFile) {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.FUNCTIONS_WORKER_RUNTIME) {
+    dbFile = '/tmp/data.sqlite';
+  } else {
+    dbFile = path.join(__dirname, '..', 'data.sqlite');
+  }
+}
 
-db.pragma('journal_mode = WAL');
+// Ensure the parent directory exists when using a filesystem-backed DB file
+try {
+  const dbDir = path.dirname(dbFile);
+  if (dbDir && dbDir !== '.') fs.mkdirSync(dbDir, { recursive: true });
+} catch (err) {
+  // If we can't create the directory, we'll log and proceed; Database open may still fail.
+  console.error('Could not create directory for SQLite file:', err && err.message);
+}
+
+let db;
+try {
+  db = new Database(dbFile);
+  db.pragma('journal_mode = WAL');
+} catch (err) {
+  // Provide a clear error message to aid debugging (path, permissions, read-only FS)
+  console.error('Failed to open SQLite database at path:', dbFile);
+  console.error(err && err.stack ? err.stack : err);
+  // As a fallback, open an in-memory DB so the app doesn't crash; note data won't persist.
+  try {
+    db = new Database(':memory:');
+    console.warn('Opened in-memory SQLite fallback database; data will not persist across restarts.');
+  } catch (memErr) {
+    console.error('Failed to open an in-memory SQLite database as fallback:', memErr && memErr.stack ? memErr.stack : memErr);
+    throw err; // rethrow original error to avoid starting in a broken state
+  }
+}
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS proposals (
