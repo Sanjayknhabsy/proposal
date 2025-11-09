@@ -7,39 +7,49 @@ const Database = require('better-sqlite3');
 // 1. process.env.DB_PATH (explicit)
 // 2. Use /tmp/data.sqlite for serverless platforms (Vercel, AWS Lambda, Azure Functions)
 // 3. Fallback to a local file at project root (../data.sqlite)
-let dbFile = process.env.DB_PATH;
-if (!dbFile) {
-  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.FUNCTIONS_WORKER_RUNTIME) {
-    dbFile = '/tmp/data.sqlite';
-  } else {
-    dbFile = path.join(__dirname, '..', 'data.sqlite');
+// Prepare candidate DB paths in order of preference.
+const candidates = [];
+if (process.env.DB_PATH) candidates.push(process.env.DB_PATH);
+// /tmp is commonly writable on serverless platforms
+candidates.push('/tmp/data.sqlite');
+// project-local fallback
+candidates.push(path.join(__dirname, '..', 'data.sqlite'));
+
+let db;
+let lastError = null;
+for (const candidate of candidates) {
+  if (!candidate) continue;
+  try {
+    const dbDir = path.dirname(candidate);
+    if (dbDir && dbDir !== '.') fs.mkdirSync(dbDir, { recursive: true });
+  } catch (mkdirErr) {
+    console.warn('Could not ensure directory for candidate DB path', candidate, mkdirErr && mkdirErr.message);
+    // continue — attempt to open may still work (e.g., file in existing dir)
+  }
+
+  try {
+    console.info('Attempting to open SQLite DB at', candidate);
+    db = new Database(candidate);
+    db.pragma('journal_mode = WAL');
+    console.info('Opened SQLite DB at', candidate);
+    break; // success
+  } catch (err) {
+    lastError = err;
+    console.warn('Failed to open SQLite DB at', candidate, '-', err && err.message);
+    // try next candidate
   }
 }
 
-// Ensure the parent directory exists when using a filesystem-backed DB file
-try {
-  const dbDir = path.dirname(dbFile);
-  if (dbDir && dbDir !== '.') fs.mkdirSync(dbDir, { recursive: true });
-} catch (err) {
-  // If we can't create the directory, we'll log and proceed; Database open may still fail.
-  console.error('Could not create directory for SQLite file:', err && err.message);
-}
-
-let db;
-try {
-  db = new Database(dbFile);
-  db.pragma('journal_mode = WAL');
-} catch (err) {
-  // Provide a clear error message to aid debugging (path, permissions, read-only FS)
-  console.error('Failed to open SQLite database at path:', dbFile);
-  console.error(err && err.stack ? err.stack : err);
-  // As a fallback, open an in-memory DB so the app doesn't crash; note data won't persist.
+if (!db) {
+  console.error('All candidate SQLite DB paths failed. Last error:', lastError && lastError.message);
+  // As a final fallback, open an in-memory DB so the app continues to run.
   try {
     db = new Database(':memory:');
     console.warn('Opened in-memory SQLite fallback database; data will not persist across restarts.');
   } catch (memErr) {
     console.error('Failed to open an in-memory SQLite database as fallback:', memErr && memErr.stack ? memErr.stack : memErr);
-    throw err; // rethrow original error to avoid starting in a broken state
+    // Re-throw the last filesystem error to avoid starting in an unusable state.
+    throw lastError || memErr;
   }
 }
 
