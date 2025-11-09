@@ -1,0 +1,280 @@
+<div class="container">
+  <header>
+    <h1 style="text-align: center;">Proposal for Habsy Business</h1>
+    <h1 style="text-align: center;">Card Manager App</h1>
+    <div style="font-size: 1.15rem; margin-top: 12px; color: #ecf0f1;">
+      For: <b data-bind="companyName"><%= proposal.companyName || 'Company Name' %></b>
+      <br>
+      Date: <b data-bind="date"><%= proposal.date || '' %></b>
+    </div>
+    <img src="https://framerusercontent.com/images/jVeiVJ9khuAlenYoYhgfaybTLF4.png" 
+         alt="Habsy Logo" 
+         style="
+           position: absolute;
+           top: 20px;
+           right: 20px;
+           width: 60px;
+           height: auto;
+           border-radius: 8px;
+           box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+         " />
+  </header>
+
+  <hr>
+
+  <h2>1. Introduction</h2>
+  <p>Habsy Technologies is pleased to submit this proposal for the provision of our AI-powered Habsy Business Card Manager app to <b data-bind="companyName"><%= proposal.companyName || 'Company Name' %></b> for their team. This proposal outlines the features, pricing, deliverables, terms, and conditions for onboarding your members onto our platform.</p>
+  <p><strong>Use Case:</strong> Habsy empowers your team to maximize ROI from exhibitions, meetings, and field visits by instantly capturing business card details on the spot. Users can scan business cards and add/sync contacts, and the app automatically deduplicates entries to ensure a clean, contact base. The contacts can then be exported for efficient follow-up, turning every connection into a qualified lead for your sales pipeline.</p>
+  <ul style="margin: 0 0 0 18px;">
+    <li><strong>Fast capture anywhere:</strong> AI scanning, batch processing, and event badge QR scanning.</li>
+    <li><strong>Context at the moment of scan:</strong> tags, custom fields, voice notes, and follow-up reminders.</li>
+    <li><strong>Reliable data quality:</strong> automatic deduplication and standardized fields for easy search.</li>
+    <li><strong>Works in the real world:</strong> multi-language support and offline capture with auto-sync.</li>
+    <li><strong>Ready for action:</strong> export to Excel (CSV) or VCF for campaigns</li>
+  </ul>
+
+  <hr>
+
+  <h2>2. Plan & Pricing</h2>
+  <p>Below is the proposed configuration tailored for your team.</p>
+
+  <h3>Pro Seats</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Plan</th>
+        <th style="width:20%;">Users</th>
+        <th>Annual Price (per user)</th>
+        <th>Annual Discount</th>
+        <th>Discounted Annual Pricing</th>
+        <th>Final Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span data-bind="planName"><%= proposal.planName || 'Pro' %></span></td>
+        <td><span data-bind="usersCount"><%= proposal.usersCount || 3 %></span> Members</td>
+        <td><span data-bind="annualPricePerUser"><%= proposal.annualPricePerUser || '₹3,000' %></span></td>
+        <td style="color: #27ae60; font-weight: 600;"><span data-bind="annualDiscountPercent"><%= proposal.annualDiscountPercent || '33.33%' %></span></td>
+        <td style="color: #27ae60; font-weight: 600;"><span data-bind="discountedAnnualPricing"><%= proposal.discountedAnnualPricing || '₹2,000 x 3' %></span></td>
+        <td><span data-bind="amount"><%= proposal.amount || '₹0' %></span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="background: #fff3cd; border-left: 6px solid #ffc107;">
+    <strong>Benefits</strong><br>
+    Leverage advanced enrichment, custom fields, voice notes, reminders, geo tagging, and other new features to make the most of your business card scanning experience.
+  </div>
+
+  <p><em>The plan is billed annually. You can add more users anytime.</em></p>
+
+  <hr>
+
+  <h2>3. What's Included in Pro</h2>
+  <div style="margin: 24px 0;">
+    <h3 style="text-align: center; color: #3498db; margin-bottom: 20px;">Pro Plan Features</h3>
+    <table style="width: 100%; border-collapse: collapse; margin: 0; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(44,62,80,0.1);">
+      <thead>
+        <tr>
+          <th style="background: #3498db; color: #fff; padding: 16px; text-align: center; font-weight: 600; width: 60%;">Features & Use Case</th>
+          <th style="background: #e67e22; color: #fff; padding: 16px; text-align: center; font-weight: 600; width: 40%;"><span data-bind="planName"><%= proposal.planName || 'Pro' %></span> Plan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 12px 16px; font-weight: 600; color: #2c3e50; background: #e9ecef; border-bottom: 2px solid #dee2e6;">
+            <strong>Core Scanning & Organization</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>AI-Powered Scanning (99% accuracy)</strong><br><em>Instantly extract contact details from business cards without manual entry.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Batch Processing (150 cards/5 min)</strong><br><em>Scan dozens of cards at once after expos or meetings.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Event Badge QR Scanning</strong><br><em>Capture leads from badges and screens in seconds.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Smart Tagging & Categorization</strong><br><em>Group contacts by context—like event, region, or interest.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Advanced Search</strong><br><em>Find any contact by name, tag, location, or keyword.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Manual Entry Option</strong><br><em>Manually add contacts when a card is unavailable or damaged.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Multi-Language Support</strong><br><em>Scan cards in major Indian and global languages.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Offline Access</strong><br><em>Scan and save contacts without internet; auto-syncs later.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Eco-Friendly Networking</strong><br><em>Reduce paper usage and support tree-planting initiatives by our team.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Geo Tagging & Map View</strong><br><em>See where each card was captured; a source of truth for sales coverage and regions visited.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Custom Fields During Scan</strong><br><em>Add extra context like requirements, interest, or priority at the time of capture.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Voice Notes</strong><br><em>Record quick audio notes after scan to capture follow-up details.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;">
+            <strong>Reminders</strong><br>
+            <em>Set follow-up reminders against contacts to ensure timely actions and meetings.</em>
+          </td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 12px 16px; font-weight: 600; color: #2c3e50; background: #e9ecef; border-bottom: 2px solid #dee2e6;">
+            <strong>Enrichment & Intelligence</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Basic Company Enrichment</strong><br><em>Company snapshot with social links.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Advanced Company & Person Enrichment</strong><br><em>Profiles incl. LinkedIn, role, and insights.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 12px 16px; font-weight: 600; color: #2c3e50; background: #e9ecef; border-bottom: 2px solid #dee2e6;">
+            <strong>Export & Sharing</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Export to Excel (CSV)</strong><br><em>Download contact list for campaigns, CRMs, or backup.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Digital Card Sharing</strong><br><em>Share your QR-based digital card on the go.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 12px 16px; font-weight: 600; color: #2c3e50; background: #e9ecef; border-bottom: 2px solid #dee2e6;">
+            <strong>Support & Reliability</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Priority Support</strong><br><em>Faster turnaround with a dedicated support manager.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+
+        <tr style="background: #f8f9fa;">
+          <td colspan="2" style="padding: 12px 16px; font-weight: 600; color: #2c3e50; background: #e9ecef; border-bottom: 2px solid #dee2e6;">
+            <strong>Security & Compliance</strong>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 16px; border-bottom: 1px solid #e9ecef;"><strong>Enterprise Grade Security</strong><br><em>Your data is securely stored in the cloud that adheres to industry-standard security and regulatory guidelines.</em></td>
+          <td style="text-align: center;">✔</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="background: #e8f5e8; border-left: 6px solid #27ae60; margin-top: 16px; padding: 12px 16px;">
+    <strong><span data-bind="planName"><%= proposal.planName || 'Pro' %></span> Highlights:</strong><br>
+    • Advanced AI Enrichment • Manager Dashboard • Custom Fields • Voice Notes • Geo Tagging • Priority Support
+  </div>
+
+  <hr>
+
+  <h2>4. Undertaking by Habsy Technologies</h2>
+  <div style="background: #f8fafd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+    <h4 style="color: #3498db; margin: 0 0 15px 0; font-size: 1.1rem;">Onboarding & Walkthrough</h4>
+    <p style="margin: 0 0 15px 0;">We will provide comprehensive onboarding support and a walkthrough for all <strong><span data-bind="usersCount"><%= proposal.usersCount || 3 %></span></strong> users.</p>
+    <h4 style="color: #3498db; margin: 0 0 15px 0; font-size: 1.1rem;">Data Security & Compliance</h4>
+    <p style="margin: 0 0 15px 0;">All user data will be stored securely, in compliance with Indian & global data protection laws and industry best practices.</p>
+    <h4 style="color: #3498db; margin: 0 0 15px 0; font-size: 1.1rem;">Platform Updates</h4>
+    <p style="margin: 0 0 15px 0;">We will provide regular updates and feature enhancements to the app during the subscription period.</p>
+    <h4 style="color: #3498db; margin: 0 0 0 0; font-size: 1.1rem;">Technical Support</h4>
+    <p style="margin: 0;">Dedicated support will be available for any technical or account issues.</p>
+  </div>
+
+  <hr>
+
+  <h2>5. Subscription & Billing</h2>
+  <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; margin: 20px 0;">
+    <h4 style="color: #27ae60; margin: 0 0 10px 0; font-size: 1.1rem;">Billing & Activation</h4>
+    <p style="margin: 0 0 10px 0; font-size: 0.95rem;">
+      We want your Habsy experience to be smooth and worry-free! To get started, simply subscribe to the <span data-bind="planName"><%= proposal.planName || 'Pro' %></span> plan and complete your payment. Your team's access will be activated right away. Your subscription is billed annually in advance, so you can enjoy uninterrupted service for the whole year. Please note that payments are non-refundable once access is granted, but our team is always here to help with any questions before you subscribe.
+    </p>
+    <p style="margin: 0; font-size: 0.95rem;">
+      As your renewal date approaches, we'll send you friendly reminders so you never miss a beat. If you ever need help with billing or have questions about your plan, just reach out. Our support team is happy to assist!
+    </p>
+  </div>
+  <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; margin: 20px 0;">
+    <h4 style="color: #27ae60; margin: 0 0 10px 0; font-size: 1.1rem;">Subscription Changes</h4>
+    <p style="margin: 0; font-size: 0.95rem;">
+      Need to add more users? You can add seats at any time, and we'll adjust your charges fairly for the rest of your subscription period. If you wish to cancel, changes will take effect at the end of your current billing cycle. No surprises, just flexibility.
+    </p>
+  </div>
+
+  <h3 style="margin-top: 16px;">Final Plan Details</h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 12px 0 8px 0;">
+    <div style="background:#f8fafd; border-left:6px solid #e67e22; border-radius:8px; padding:16px 18px; box-shadow: 0 1px 4px rgba(44,62,80,0.06);">
+      <div style="font-weight:600; color:#2c3e50; margin-bottom:8px;"><span data-bind="planName"><%= proposal.planName || 'Pro' %></span> Plan (<span data-bind="usersCount"><%= proposal.usersCount || 3 %></span> Users)</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div style="font-size:1.6rem; font-weight:700; color:#27ae60;" data-bind="amount"><%= proposal.amount || '₹0' %></div>
+      </div>
+    </div>
+  </div>
+  
+  <hr>
+
+  <h2>6. Acceptance</h2>
+  <p>To proceed, please confirm the <span data-bind="planName"><%= proposal.planName || 'Pro' %></span> plan; invoice will be generated accordingly. Once payment is received, we will activate access and begin onboarding. For any queries, please contact <a href="mailto:contact@habsy.in">contact@habsy.in</a>.</p>
+
+  <div style="margin: 28px 0 18px 0; padding: 18px 24px; background: #f4f8fb; border-left: 6px solid #3498db; border-radius: 6px;">
+    <div style="margin-bottom: 10px;">
+      <strong>For any queries, please contact:</strong><br>
+      <strong data-bind="personName"><%= proposal.personName || 'Your Contact' %></strong>, Product Manager<br>
+      Email: <a href="mailto:contact@habsy.in">contact@habsy.in</a><br>
+      Phone: 9626293068
+    </div>
+    <div>
+      <strong>For urgent matters, escalate to:</strong><br>
+      <strong>Yaswant Selvaraj</strong>, Founder & CEO<br>
+      Email: <a href="mailto:yaswant@habsy.in">yaswant@habsy.in</a><br>
+      Phone: 9368148390
+    </div>
+  </div>
+
+  <div style="margin: 32px 0 0 0; padding: 18px 24px; background: #f8fafd; border-left: 6px solid #3498db; border-radius: 6px;">
+    <strong>Coimbatore Office:</strong><br>
+    Habsy Technologies Private Limited<br>
+    11/4 Pooja Garden, Kalapatti Main Road,<br>
+    SITRA, Coimbatore,<br>
+    Tamil Nadu 641014, India
+  </div>
+
+  <hr>
+  <p>Thank you for considering Habsy as your digital networking partner. We look forward to helping your team network smarter, faster, and greener.</p>
+  <p style="font-size:0.97rem; color:#4a5a6a; margin-top:8px; margin-bottom:0; text-align:center;">
+    &copy; 2025 Habsy Technologies Pvt Ltd &nbsp;|&nbsp; Email: <a href="mailto:contact@habsy.in" style="color:#3498db; text-decoration:none;">contact@habsy.in</a> &nbsp;|&nbsp; Website: <a href="https://habsy.ai" target="_blank" style="color:#3498db; text-decoration:none;">habsy.ai</a>
+  </p>
+</div>
+
+

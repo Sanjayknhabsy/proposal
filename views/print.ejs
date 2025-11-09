@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= proposal.companyName ? proposal.companyName + ' - Proposal' : 'Proposal' %></title>
+    <link rel="stylesheet" href="/public/css/proposal.css" />
+  </head>
+  <body>
+    <%- include('partials/proposal_fragment', { proposal }) %>
+  </body>
+  </html>
+
+
+

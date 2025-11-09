@@ -1,0 +1,70 @@
+<section>
+  <div class="section-header">
+    <h2><%= mode === 'create' ? 'Create Proposal' : 'Edit Proposal' %></h2>
+    <% if (mode === 'edit') { %>
+      <div>
+        <a class="btn" href="/proposals/<%= proposal.id %>">Back to Proposal</a>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="grid-2">
+    <form class="card" action="<%= mode === 'create' ? '/proposals' : '/proposals/' + proposal.id %>" method="post" id="proposal-form">
+      <div class="form-row">
+        <label for="companyName">Company Name</label>
+        <input id="companyName" name="companyName" type="text" value="<%= proposal.companyName %>" required />
+      </div>
+      <div class="form-row">
+        <label for="personName">Person's Name</label>
+        <input id="personName" name="personName" type="text" value="<%= proposal.personName %>" required />
+      </div>
+      <div class="form-row">
+        <label for="planName">Plan Name</label>
+        <input id="planName" name="planName" type="text" value="<%= proposal.planName %>" required />
+      </div>
+      <div class="form-row">
+        <label for="usersCount">Users (count)</label>
+        <input id="usersCount" name="usersCount" type="number" min="1" step="1" value="<%= proposal.usersCount || 3 %>" required />
+      </div>
+      <div class="form-row">
+        <label for="annualPricePerUser">Annual Price (per user)</label>
+        <input id="annualPricePerUser" name="annualPricePerUser" type="text" value="<%= proposal.annualPricePerUser || '₹3,000' %>" required />
+      </div>
+      <div class="form-row">
+        <label for="annualDiscountPercent">Annual Discount (%)</label>
+        <input id="annualDiscountPercent" name="annualDiscountPercent" type="text" value="<%= proposal.annualDiscountPercent || '33.33%' %>" required />
+      </div>
+      <div class="form-row">
+        <label for="discountedAnnualPricing">Discounted Annual Pricing</label>
+        <input id="discountedAnnualPricing" name="discountedAnnualPricing" type="text" value="<%= proposal.discountedAnnualPricing || '₹2,000 x 3' %>" required />
+      </div>
+      <div class="form-row">
+        <label for="date">Date</label>
+        <input id="date" name="date" type="text" value="<%= proposal.date %>" required />
+      </div>
+      <div class="form-row">
+        <label for="amount">Amount (Final Pricing)</label>
+        <input id="amount" name="amount" type="text" value="<%= proposal.amount %>" required />
+      </div>
+      <div class="form-actions">
+        <button class="btn primary" type="submit"><%= mode === 'create' ? 'Create' : 'Save Changes' %></button>
+      </div>
+    </form>
+
+    <div class="card">
+      <div class="preview-header">
+        <div class="left">
+          <h3>Live Preview</h3>
+        </div>
+        <div class="right">
+          <button class="btn" type="button" onclick="window.print()">Print Preview</button>
+        </div>
+      </div>
+      <div id="proposal-preview">
+        <%- include('partials/proposal_fragment', { proposal }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+

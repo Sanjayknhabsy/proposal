@@ -1,0 +1,89 @@
+<section>
+  <div class="section-header">
+    <h2>Proposals</h2>
+    <a class="btn primary" href="/proposals/new">Create Proposal</a>
+  </div>
+  <% if (proposals.length === 0) { %>
+    <div class="empty">No proposals yet. Create your first one.</div>
+  <% } else { %>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Plan</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th style="width:260px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const p of proposals) { %>
+            <tr>
+              <td><%= p.companyName %></td>
+              <td><%= p.planName %></td>
+              <td><%= p.amount %></td>
+              <td><%= p.date %></td>
+              <td class="actions">
+                <a class="btn" href="/proposals/<%= p.id %>">View</a>
+                <a class="btn" href="/proposals/<%= p.id %>/edit">Edit</a>
+                <button class="btn" type="button" data-toggle-edit data-id="<%= p.id %>">Quick Edit</button>
+                <form action="/proposals/<%= p.id %>/delete" method="post" style="display:inline;">
+                  <button class="btn danger" onclick="return confirm('Delete this proposal?');">Delete</button>
+                </form>
+              </td>
+            </tr>
+            <tr class="quick-edit-row" id="edit-row-<%= p.id %>" style="display:none;">
+              <td colspan="5">
+                <form class="quick-edit-form" action="/proposals/<%= p.id %>" method="post">
+                  <div class="form-row">
+                    <label for="companyName-<%= p.id %>">Company Name</label>
+                    <input id="companyName-<%= p.id %>" name="companyName" type="text" value="<%= p.companyName %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="personName-<%= p.id %>">Person's Name</label>
+                    <input id="personName-<%= p.id %>" name="personName" type="text" value="<%= p.personName || '' %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="planName-<%= p.id %>">Plan Name</label>
+                    <input id="planName-<%= p.id %>" name="planName" type="text" value="<%= p.planName %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="usersCount-<%= p.id %>">Users</label>
+                    <input id="usersCount-<%= p.id %>" name="usersCount" type="number" min="1" step="1" value="<%= p.usersCount || 3 %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="annualPricePerUser-<%= p.id %>">Annual Price (per user)</label>
+                    <input id="annualPricePerUser-<%= p.id %>" name="annualPricePerUser" type="text" value="<%= p.annualPricePerUser || '₹3,000' %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="annualDiscountPercent-<%= p.id %>">Annual Discount (%)</label>
+                    <input id="annualDiscountPercent-<%= p.id %>" name="annualDiscountPercent" type="text" value="<%= p.annualDiscountPercent || '33.33%' %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="discountedAnnualPricing-<%= p.id %>">Discounted Annual Pricing</label>
+                    <input id="discountedAnnualPricing-<%= p.id %>" name="discountedAnnualPricing" type="text" value="<%= p.discountedAnnualPricing || ('₹2,000 x ' + (p.usersCount || 3)) %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="date-<%= p.id %>">Date</label>
+                    <input id="date-<%= p.id %>" name="date" type="text" value="<%= p.date %>" required />
+                  </div>
+                  <div class="form-row">
+                    <label for="amount-<%= p.id %>">Final Amount</label>
+                    <input id="amount-<%= p.id %>" name="amount" type="text" value="<%= p.amount %>" required />
+                  </div>
+                  <div class="quick-edit-actions">
+                    <button class="btn primary" type="submit">Save</button>
+                    <button class="btn" type="button" data-cancel-edit data-id="<%= p.id %>">Cancel</button>
+                  </div>
+                </form>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>
+
+
